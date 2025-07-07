@@ -15,7 +15,6 @@ class VentanaMenu(QWidget):
         self.setFixedSize(800, 600)
         self.ventana_inicio = ventana_inicio
 
-        # Carga el logo para fondo
         self.ruta_logo = "assets/logo.png"
         self.logo_pixmap = QPixmap(self.ruta_logo).scaled(
             self.size(), Qt.KeepAspectRatioByExpanding, Qt.SmoothTransformation
@@ -24,12 +23,10 @@ class VentanaMenu(QWidget):
         self.init_ui()
 
     def init_ui(self):
-        # Layout principal para los botones y barra
         layout_principal = QVBoxLayout()
         layout_principal.setContentsMargins(20, 20, 20, 20)
         layout_principal.setSpacing(10)
 
-        # Barra superior con botón Cerrar sesión a la derecha
         barra_superior = QHBoxLayout()
         barra_superior.addSpacerItem(QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum))
 
@@ -52,7 +49,6 @@ class VentanaMenu(QWidget):
 
         layout_principal.addLayout(barra_superior)
 
-        # Layout para los botones principales (Clientes y Trabajos)
         botones_layout = QVBoxLayout()
         botones_layout.setAlignment(Qt.AlignCenter)
 
@@ -79,16 +75,14 @@ class VentanaMenu(QWidget):
     def paintEvent(self, event):
         """Dibuja el logo de fondo con opacidad."""
         painter = QPainter(self)
-        painter.setOpacity(0.15)  # Opacidad baja para efecto tenue
-        # Ajusta el pixmap para que cubra toda la ventana
+        painter.setOpacity(0.15)  
         pixmap_redimensionado = self.logo_pixmap.scaled(
             self.size(), Qt.KeepAspectRatioByExpanding, Qt.SmoothTransformation
         )
-        # Centrar el pixmap
         x = (self.width() - pixmap_redimensionado.width()) // 2
         y = (self.height() - pixmap_redimensionado.height()) // 2
         painter.drawPixmap(x, y, pixmap_redimensionado)
-        painter.setOpacity(1)  # Restablece opacidad normal
+        painter.setOpacity(1) 
         super().paintEvent(event)
 
     def cerrar_sesion(self):
