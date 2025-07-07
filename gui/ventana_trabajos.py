@@ -20,7 +20,7 @@ class VentanaTrabajos(QWidget):
         self.setWindowTitle("Trabajos - TigMotors")
         self.setGeometry(100, 100, 1000, 600)
 
-        # Carga logo para fondo
+
         self.ruta_logo = "assets/logo.png"
         self.logo_pixmap = QPixmap(self.ruta_logo).scaled(
             self.size(), Qt.KeepAspectRatioByExpanding, Qt.SmoothTransformation
@@ -33,7 +33,7 @@ class VentanaTrabajos(QWidget):
     def setup_ui(self):
         layout = QVBoxLayout()
 
-        # Botón Regresar estilizado
+
         self.boton_regresar = QPushButton("Regresar")
         self.boton_regresar.setFixedSize(80, 30)
         self.boton_regresar.setCursor(QCursor(Qt.PointingHandCursor))
@@ -51,7 +51,7 @@ class VentanaTrabajos(QWidget):
         self.boton_regresar.clicked.connect(self.regresar_menu)
         layout.addWidget(self.boton_regresar)
 
-        # --- Fila para ingresar un trabajo ---
+
         self.combo_nombres = QComboBox()
         self.descripcion_input = QLineEdit()
         self.descripcion_input.setMaxLength(100)
@@ -81,7 +81,7 @@ class VentanaTrabajos(QWidget):
 
         layout.addLayout(form_layout)
 
-        # --- Botones de filtros ---
+
         filtros_layout = QHBoxLayout()
         self.boton_filtros = QPushButton("Sistema de Filtros")
         self.boton_filtros.setFixedSize(150, 30)
@@ -97,7 +97,7 @@ class VentanaTrabajos(QWidget):
         filtros_layout.addWidget(self.boton_borrar_filtros)
         layout.addLayout(filtros_layout)
 
-        # --- Tabla de trabajos ---
+
         self.tabla = QTableWidget()
         self.tabla.setColumnCount(7)
         self.tabla.setHorizontalHeaderLabels(["ID", "Nombre", "Descripción", "Precio", "Inicio", "Fin", "Acción"])
@@ -110,7 +110,7 @@ class VentanaTrabajos(QWidget):
     def paintEvent(self, event):
         """Dibuja el logo de fondo con opacidad."""
         painter = QPainter(self)
-        painter.setOpacity(0.15)  # Opacidad baja para efecto tenue
+        painter.setOpacity(0.15)  
         pixmap_redimensionado = self.logo_pixmap.scaled(
             self.size(), Qt.KeepAspectRatioByExpanding, Qt.SmoothTransformation
         )
@@ -188,7 +188,7 @@ class VentanaTrabajos(QWidget):
                 fecha_inicio = data.get("fecha_inicio", "")
                 fecha_fin = data.get("fecha_fin", "")
 
-                # Si hay filtros, aplicar
+
                 if filtros:
                     if "id_trabajo" in filtros and filtros["id_trabajo"] != id_trabajo:
                         continue
