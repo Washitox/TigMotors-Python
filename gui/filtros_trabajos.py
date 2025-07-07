@@ -2,7 +2,7 @@ from PyQt5.QtWidgets import (
     QDialog, QLabel, QLineEdit, QPushButton, QVBoxLayout, QHBoxLayout, QDateEdit, QComboBox, QMessageBox
 )
 from PyQt5.QtCore import QDate
-from firebase_config import db  # Asumiendo que aquí tienes configurada la conexión
+from firebase_config import db  
 
 class FiltroTrabajosDialog(QDialog):
     def __init__(self, aplicar_filtros_callback):
@@ -18,9 +18,9 @@ class FiltroTrabajosDialog(QDialog):
 
         self.id_input = QLineEdit()
 
-        # Ahora usamos combo para nombres
+        
         self.nombre_combo = QComboBox()
-        self.nombre_combo.addItem("", None)  # opción vacía para que no filtre si no se elige nada
+        self.nombre_combo.addItem("", None)  
 
         self.fecha_inicio = QDateEdit(calendarPopup=True)
         self.fecha_inicio.setDisplayFormat("yyyy-MM-dd")
@@ -59,7 +59,7 @@ class FiltroTrabajosDialog(QDialog):
     def cargar_nombres_clientes(self):
         try:
             self.nombre_combo.clear()
-            self.nombre_combo.addItem("", None)  # para dejar opción vacía
+            self.nombre_combo.addItem("", None) 
             clientes_ref = db.collection("clientes").stream()
             for cliente in clientes_ref:
                 datos = cliente.to_dict()
@@ -74,11 +74,11 @@ class FiltroTrabajosDialog(QDialog):
 
         id_trabajo = self.id_input.text().strip()
         nombre = self.nombre_combo.currentText().strip()
-        # Para que si no eliges nada no filtre
+        
         if nombre == "":
             nombre = None
 
-        # Verifica si el usuario modificó las fechas desde el valor mínimo
+        
         fecha_inicio_seleccionada = self.fecha_inicio.date() != self.fecha_inicio.minimumDate()
         fecha_fin_seleccionada = self.fecha_fin.date() != self.fecha_fin.minimumDate()
 
