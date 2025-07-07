@@ -8,7 +8,7 @@ from PyQt5.QtCore import Qt
 from firebase_admin import firestore
 from firebase_config import db
 
-db = firestore.client()  # Asegúrate que firebase esté inicializado antes
+db = firestore.client()  
 
 class VentanaClientes(QWidget):
     def __init__(self, ventana_inicio):
@@ -17,7 +17,7 @@ class VentanaClientes(QWidget):
         self.setWindowTitle("Clientes - TigMotors")
         self.setGeometry(100, 100, 900, 600)
 
-        # Carga logo para fondo
+       
         self.ruta_logo = "assets/logo.png"
         self.logo_pixmap = QPixmap(self.ruta_logo).scaled(
             self.size(), Qt.KeepAspectRatioByExpanding, Qt.SmoothTransformation
@@ -27,7 +27,7 @@ class VentanaClientes(QWidget):
         self.cargar_clientes()
 
     def setup_ui(self):
-        # Botón Regresar con estilo como Cerrar sesión
+        
         self.boton_regresar = QPushButton("Regresar", self)
         self.boton_regresar.move(10, 10)
         self.boton_regresar.setFixedSize(80, 30)
@@ -48,7 +48,7 @@ class VentanaClientes(QWidget):
         """)
         self.boton_regresar.clicked.connect(self.regresar_menu)
 
-        # Inputs para agregar cliente
+        
         self.nombre_input = QLineEdit()
         self.nombre_input.setMaxLength(20)
         self.empresa_input = QLineEdit()
@@ -73,7 +73,7 @@ class VentanaClientes(QWidget):
         input_layout.addWidget(self.numero_input)
         input_layout.addWidget(self.boton_agregar)
 
-        # Tabla clientes
+        
         self.tabla = QTableWidget()
         self.tabla.setColumnCount(6)
         self.tabla.setHorizontalHeaderLabels(["ID", "Nombre", "Empresa", "Correo", "Número", "Acción"])
@@ -83,7 +83,7 @@ class VentanaClientes(QWidget):
         self.tabla.horizontalHeader().setStretchLastSection(True)
         self.tabla.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
 
-        # Layout general
+        
         main_layout = QVBoxLayout()
         main_layout.addWidget(self.boton_regresar)
         main_layout.addLayout(input_layout)
@@ -94,7 +94,7 @@ class VentanaClientes(QWidget):
     def paintEvent(self, event):
         """Dibuja el logo de fondo con opacidad."""
         painter = QPainter(self)
-        painter.setOpacity(0.15)  # Opacidad baja para que el logo sea tenue
+        painter.setOpacity(0.15)  
         pixmap_redimensionado = self.logo_pixmap.scaled(
             self.size(), Qt.KeepAspectRatioByExpanding, Qt.SmoothTransformation
         )
@@ -105,7 +105,7 @@ class VentanaClientes(QWidget):
         super().paintEvent(event)
 
     def regresar_menu(self):
-        from gui.ventana_menu import VentanaMenu  # Importación local para evitar ciclos
+        from gui.ventana_menu import VentanaMenu  
         self.close()
         self.ventana_menu = VentanaMenu(self.ventana_inicio)
         self.ventana_menu.show()
@@ -139,7 +139,7 @@ class VentanaClientes(QWidget):
                 try:
                     ids.append(int(c.id))
                 except:
-                    pass  # Ignorar IDs no numéricos
+                    pass 
 
             nuevo_id = str(max(ids) + 1) if ids else "1"
 
