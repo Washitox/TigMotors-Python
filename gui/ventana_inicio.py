@@ -13,30 +13,25 @@ class VentanaInicio(QWidget):
 
         ruta_logo = "assets/logo.png"
 
-        # Crear pixmap del logo escalado al tamaño de la ventana
         pixmap_fondo = QPixmap(ruta_logo).scaled(
             self.size(), Qt.KeepAspectRatioByExpanding, Qt.SmoothTransformation
         )
 
-        # Crear pixmap semitransparente para efecto opaco
         pixmap_opaco = QPixmap(pixmap_fondo.size())
         pixmap_opaco.fill(Qt.transparent)
 
         painter = QPainter(pixmap_opaco)
-        painter.setOpacity(0.3)  # Opacidad al 30%
+        painter.setOpacity(0.3)  
         painter.drawPixmap(0, 0, pixmap_fondo)
         painter.end()
 
-        # QLabel para el fondo
         self.fondo = QLabel(self)
         self.fondo.setPixmap(pixmap_opaco)
         self.fondo.setGeometry(0, 0, self.width(), self.height())
 
-        # Layout para los widgets frontales
         layout = QVBoxLayout()
         layout.setAlignment(Qt.AlignCenter)
 
-        # Logo frontal, más pequeño para el centro (opcional)
         self.logo = QLabel()
         pixmap_logo = QPixmap(ruta_logo).scaled(
             200, 200, Qt.KeepAspectRatio, Qt.SmoothTransformation
@@ -45,7 +40,6 @@ class VentanaInicio(QWidget):
         self.logo.setAlignment(Qt.AlignCenter)
         self.logo.setStyleSheet("background: transparent;")
 
-        # Campo de código
         self.input_codigo = QLineEdit()
         self.input_codigo.setPlaceholderText("Ingrese el código de acceso")
         self.input_codigo.setMaxLength(6)
@@ -55,7 +49,6 @@ class VentanaInicio(QWidget):
         self.input_codigo.setEchoMode(QLineEdit.Password)
         self.input_codigo.setStyleSheet("background: rgba(255, 255, 255, 180); border-radius: 5px;")
 
-        # Botón ingresar
         self.boton_ingresar = QPushButton("Ingresar")
         self.boton_ingresar.setFixedHeight(40)
         self.boton_ingresar.setFont(QFont("Arial", 12))
@@ -79,7 +72,6 @@ class VentanaInicio(QWidget):
         layout.addSpacing(10)
         layout.addWidget(self.boton_ingresar)
 
-        # Layout principal: para que los widgets estén sobre el fondo
         contenedor = QWidget(self)
         contenedor.setLayout(layout)
         contenedor.setGeometry(0, 0, self.width(), self.height())
